@@ -1,0 +1,243 @@
+{extend name="public/base" /}
+{block name="content"}
+<div id="page-wrapper" class="gray-bg dashbard-1">
+    <div class="row  border-bottom white-bg dashboard-header">
+        <div class="col-md-3">
+            <h2>网站流量分析</h2>
+            <small>今日网站总访问数：{$pv_count}</small>
+            <br />
+            <br />
+            <small>今日热文排行</small>
+            <ul class="list-group clear-list m-t">
+                {volist name="article_list" id="vo"  key="k"  empty="暂时没有数据" }
+                    <li class="list-group-item fist-item">
+                                    <span class="pull-right">
+                                        {$vo.view_count}
+                                    </span>
+                        <span class="label label-success">{$k}</span><a href="/index/article/detail/id/{$vo.article_id}">{$vo.title}</a>
+                    </li>
+                {/volist}
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <div class="flot-chart dashboard-chart">
+                <div class="flot-chart-content" id="flot-dashboard-chart"></div>
+            </div>
+            <div class="row text-left">
+                <div class="col-xs-4">
+                    <div class=" m-l-md">
+                        <span class="h4 font-bold m-t block">{$total_user_count}</span>
+                        <small class="text-muted m-b block">累计注册</small>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <span class="h4 font-bold m-t block">{$new_user_count}</span>
+                    <small class="text-muted m-b block">当天注册人数</small>
+                </div>
+                <div class="col-xs-4">
+                    <span class="h4 font-bold m-t block">{$click_count}</span>
+                    <small class="text-muted m-b block">商家菜单点击量</small>
+                </div>
+
+            </div>
+        </div>
+        <!--<div class="col-md-3">-->
+            <!--<div class="statistic-box">-->
+                <!--<h4>-->
+                    <!--Project Beta progress-->
+                <!--</h4>-->
+                <!--<p>-->
+                    <!--You have two project with not compleated task.-->
+                <!--</p>-->
+                <!--<div class="row text-center">-->
+                    <!--<div class="col-lg-6">-->
+                        <!--<canvas id="doughnutChart2" width="80" height="80" style="margin: 18px auto 0"></canvas>-->
+                        <!--<h5 >Kolter</h5>-->
+                    <!--</div>-->
+                    <!--<div class="col-lg-6">-->
+                        <!--<canvas id="doughnutChart" width="80" height="80" style="margin: 18px auto 0"></canvas>-->
+                        <!--<h5 >Maxtor</h5>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="m-t">-->
+                    <!--<small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
+
+    </div>
+
+</div>
+{/block}
+
+{block name="script"}
+<script>
+//    $(document).ready(function() {
+//        var data1;
+//        var data2;
+//        $.ajax({
+//            type: "POST",
+//            url: "getFlow",
+//            async:false,
+//            dataType: "json",
+//            success: function(data){
+//                console.log(data);
+//                data1 = data['ip'];
+//                data2 = data['users'];
+//            },
+//            error:function(data){
+//                console.log(data);
+//            }
+//        })
+//
+//        loadPic(data1,data2);
+//
+//    });
+//
+//    function loadPic(data1,data2){
+//        $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
+//                    data1, data2
+//                ],
+//                {
+//                    series: {
+//                        lines: {
+//                            show: false,
+//                            fill: true
+//                        },
+//                        splines: {
+//                            show: true,
+//                            tension: 0.4,
+//                            lineWidth: 1,
+//                            fill: 0.4
+//                        },
+//                        points: {
+//                            radius: 0,
+//                            show: true
+//                        },
+//                        shadowSize: 2
+//                    },
+//                    grid: {
+//                        hoverable: true,
+//                        clickable: true,
+//                        tickColor: "#d5d5d5",
+//                        borderWidth: 1,
+//                        color: '#d5d5d5'
+//                    },
+//                    colors: ["#1ab394", "#1C84C6"],
+//                    xaxis:{
+//                    },
+//                    yaxis: {
+//                        ticks: 4
+//                    },
+//                    tooltip: false
+//                }
+//        );
+//
+//        var doughnutData = {
+//            labels: ["App","Software","Laptop" ],
+//            datasets: [{
+//                data: [300,50,100],
+//                backgroundColor: ["#a3e1d4","#dedede","#9CC3DA"]
+//            }]
+//        } ;
+//
+//
+//        var doughnutOptions = {
+//            responsive: false,
+//            legend: {
+//                display: false
+//            }
+//        };
+//
+//
+//        var ctx4 = document.getElementById("doughnutChart").getContext("2d");
+//        new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
+//
+//        var doughnutData = {
+//            labels: ["App","Software","Laptop" ],
+//            datasets: [{
+//                data: [70,27,85],
+//                backgroundColor: ["#a3e1d4","#dedede","#9CC3DA"]
+//            }]
+//        } ;
+//
+//
+//        var doughnutOptions = {
+//            responsive: false,
+//            legend: {
+//                display: false
+//            }
+//        };
+//
+//
+//        var ctx4 = document.getElementById("doughnutChart2").getContext("2d");
+//        new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
+//
+//    }
+    $(document).ready(function() {
+        var data1;
+        var data2;
+        $.ajax({
+            type: "POST",
+            url: "getFlow",
+            async:false,
+            dataType: "json",
+            success: function(data){
+                console.log(data);
+                data1 = data['ip'];
+                data2 = data['users'];
+            },
+            error:function(data){
+                console.log(data);
+            }
+        })
+
+        loadPic(data1);
+
+    });
+
+    function loadPic(data1){
+        $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
+                    data1
+                ],
+                {
+                    series: {
+                        lines: {
+                            show: false,
+                            fill: true
+                        },
+                        splines: {
+                            show: true,
+                            tension: 0.4,
+                            lineWidth: 1,
+                            fill: 0.4
+                        },
+                        points: {
+                            radius: 0,
+                            show: true
+                        },
+                        shadowSize: 12
+                    },
+                    grid: {
+                        hoverable: true,
+                        clickable: true,
+                        tickColor: "#d5d5d5",
+                        borderWidth: 1,
+                        color: '#d5d5d5'
+                    },
+                    colors: ["#1ab394", "#1C84C6"],
+                    xaxis:{
+                    },
+                    yaxis: {
+                        ticks: 4
+                    },
+                    tooltip: false
+                }
+        );
+
+
+
+    }
+</script>
+{/block}

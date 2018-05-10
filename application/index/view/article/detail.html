@@ -1,0 +1,92 @@
+{extend name="public/base" /}
+
+{block name="content"}
+<div class="layout-sidebar-no group">
+
+    <!-- START SLOGAN -->
+    <div id="slogan">
+        <h1>{$article.title}</h1>
+        <h3>作者：{$article.nickname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            发布时间：{$article.add_time|substr=0,4}年{$article.add_time|substr=5,2}月{$article.add_time|substr=8,2}日
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击数：{$article.click_count}
+        </h3>
+    </div>
+    <!-- END SLOGAN -->
+
+    <!-- START CONTENT -->
+    <div class="group" id="content">
+
+        <!-- HENTRY -->
+        <div class="hentry group">
+            {$article.content}
+        </div>
+        <!-- END HENTRY -->
+
+    </div><!-- /#content -->
+    <!-- END CONTENT -->
+
+</div><!-- /.layout-sidebar-no -->
+<!-- END MAIN CONTENT -->
+
+
+<!--<div id="container1">
+
+    {volist name="comment_list" id="v" key="k" empty="暂时没有数据" }
+    <div class="float">
+        <img src="{$v.avatar_url}"/>
+    </div>
+    <div class="float">
+        <div class="content1">
+            {$v.comment_content}
+        </div>
+    </div>
+    <div class="clear"></div>
+    {/volist}
+</div>-->
+
+
+<!--<link rel="stylesheet" type="text/css" media="all" href="https://bulma.io/css/bulma-docs.css?v=201803201452"/>-->
+
+
+
+<!--<link rel="stylesheet" type="text/css" media="all" href="/f_static/css/pinglun.css"/>
+{volist name="comment_list" id="v" key="k" empty="暂时没有数据" }
+<div class="card">
+    <div class="card-content">
+        <div class="media">
+            <div class="media-left">
+                <figure class="image is-48x48">
+                    <img src="{$v.avatar_url}" alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="media-content">
+                <p class="title is-4">{$v.nickname}</p>
+            </div>
+        </div>
+
+        <div class="content">
+            {$v.comment_content}
+            <br>
+            <time datetime="2016-1-1">{$v.add_time}</time>
+        </div>
+    </div>
+</div>
+{/volist}
+
+
+<div class="comment-add">
+     <div class="commentguest">
+           <img src="img/guest.png" class="img-circle">
+     </div>
+     <div id="comment-input" class="comment-input">
+       <div class="commentarea">
+             <textarea  id="content1" rows="6" cols="80" onpropertychange="if(this.scrollHeight> 80)this.style.posHeight=this.scrollHeight+5" placeholder="请写下您的评论"></textarea>
+           </div>
+       <div class="commentbtn">
+         <div class="commentmask"></div>
+         <a href="javascript:;" class="getcomment btn btn-block" role="button">评论</a>
+           </div>
+      </div>
+</div>-->
+
+{/block}

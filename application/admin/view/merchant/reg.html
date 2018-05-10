@@ -1,0 +1,147 @@
+{include file='public/header'}
+<body>
+
+<div id="wrapper">
+    {include file="public/left"}
+    <div id="page-wrapper" class="gray-bg">
+        {include file="public/head"}
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>注册商家</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                                <div class="form-group"><label class="col-lg-2 control-label">商家名</label>
+                                    <div class="col-lg-10"><input type="text" name="merchant_name" placeholder=""
+                                                                  class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">地址</label>
+                                    <div class="col-lg-10"><input type="text" name="address" placeholder=""
+                                                                  class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-2 control-label">商家介绍</label>
+                                    <div class="col-lg-10"><input type="text" name="merchant_introduce" placeholder=""
+                                                                  class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">联系方式</label>
+                                    <div class="col-lg-10"><input type="text" placeholder="" name="mobile"
+                                                                  class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <span class="input-group-addon btn btn-default btn-file">
+                                        <span class="fileinput-new"></span>
+                                        <span class="fileinput-exists"></span>
+                                        <input type="file" name="merchant_logo" id="merchant_logo"/>
+                                    </span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists">公司LOGO</a>
+                                </div>
+
+
+
+
+                                <br />
+                                <br />
+
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">管理员昵称</label>
+                                    <div class="col-lg-10"><input type="text" placeholder="" name="nickname"
+                                                                  class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">自我介绍</label>
+                                    <div class="col-lg-10"><input type="text" placeholder="" name="user_introduce"
+                                                                  class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">密码</label>
+                                    <div class="col-lg-10"><input type="password" name="passwd" placeholder=""
+                                                                  class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">性别</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control m-b" name="sex">
+                                            <option value="1">男</option>
+                                            <option value="2">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <span class="input-group-addon btn btn-default btn-file">
+                                        <span class="fileinput-new"></span>
+                                        <span class="fileinput-exists"></span>
+                                        <input type="file" name="avatar"/>
+                                    </span>
+                                    <a href="#" class="input-group-addon btn btn-default fileinput-exists"
+                                       data-dismiss="fileinput">个人头像</a>
+                                </div>
+
+                                <!--<div class="fileinput fileinput-new input-group" data-provides="fileinput">-->
+                                <!--<label class="col-lg-2 control-label">用户头像</label>-->
+                                <!--<div class="col-lg-10">-->
+                                <!--<span class="input-group-addon btn btn-default btn-file">-->
+                                <!--<span class="fileinput-new"></span>-->
+                                <!--<input type="file" name="file"/>-->
+                                <!--</span>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <input type="submit" data-toggle="modal" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Mainly scripts -->
+<script src="/static/js/jquery-2.1.1.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<script src="/static/js/plugins/dataTables/datatables.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/static/js/inspinia.js"></script>
+<script src="/static/js/plugins/pace/pace.min.js"></script>
+
+<script>
+    /*function remove(id){
+     $.post("/admin/remove/remove", { id: id },
+     function(data){
+     window.location.reload();
+     }, "Json")
+     }*/
+//    function upgrade(id) {
+//        $.post("/admin/merchant/reg", {id: id},
+//            function (data) {
+//                window.location.reload();
+//            }, "Json")
+//    }
+</script>
+
+</body>
+</html>
+

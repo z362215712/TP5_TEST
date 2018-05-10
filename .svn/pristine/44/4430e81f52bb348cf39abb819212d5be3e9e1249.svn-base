@@ -1,0 +1,31 @@
+<?php
+namespace app\admin\controller;
+
+use app\admin\model\Logvisit;
+use think\Controller;
+use think\Db;
+use think\Request;
+
+class Common extends Controller
+{
+    protected function _initialize()
+    {
+        $this->LogVisit();
+    }
+
+    /**
+     * 添加日志
+     */
+    public function LogVisit()
+    {
+        $LogVisit=new Logvisit();
+        $ip=$_SERVER['REMOTE_ADDR'];
+        $res=$LogVisit->get(['visit_time'=>date('Y-m-d'),'ip_address'=>$ip]);
+        if(empty($res)){
+            $LogVisit->save(['ip_address'=>$ip]);
+        }
+    }
+
+
+
+}

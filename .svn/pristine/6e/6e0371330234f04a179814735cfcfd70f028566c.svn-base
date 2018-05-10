@@ -1,0 +1,148 @@
+<?php
+namespace app\admin\controller;
+
+use think\Controller;
+use think\Db;
+use think\Log;
+use think\Request;
+use app\admin\model\Article as ArticleModel;
+
+class Article extends Controller
+{
+    private $user_id;
+    private $page = 10;
+
+    protected function _initialize()
+    {
+        //$this->user_id = $_SESSION['user_id'];
+        $this->user_id = 1;
+        $user = Db::name('user')->where('user_id', $this->user_id)->find();
+        $this->assign('user', $user);
+    }
+
+    public function index()
+    {
+        $keyword = Request::instance()->param('keyword', '');
+
+        $status_where = ['status' => '2'];
+        $article = new ArticleModel;
+        if (!empty($keyword)) {
+            $keyword_where = ['title' => ['like', "%$keyword%"]];
+            $where = array_merge($status_where, $keyword_where);
+            $article_list = $article->getList($this->page, $where);
+            $article_list->appends('keyword', $keyword)->render();
+        } else {
+            $article_list = $article->getList($this->page, $status_where);
+        }
+
+        $this->assign('article_list', $article_list);
+        return view();
+    }
+
+    /**
+     * 修改文章状态
+     * @return string
+     */
+    public function updateStatus()
+    {
+        $act = Request::instance()->param('act', '');
+        $act_array = explode('_', $act);
+        switch ($act_array[0]) {
+            case 'del':
+                Db::name('Article')->where('article_id', $act_array[1])->update(['status' => 1]);
+                break;
+            case 'pass':
+                Db::name('Article')->where('article_id', $act_array[1])->update(['status' => 2]);
+                break;
+            default:
+                break;
+        }
+        return 'ok';
+    }
+
+    /**
+     * 发布文章
+     * @return string|\think\response\View
+     */
+    public function publish()
+    {
+        if (Request::instance()->isPost()) {
+            if (!isset($_FILES['file']) || $_FILES['file']['error']==4) {
+                return '请上传图片';
+            }
+            Log::info('data' . print_r($_POST, true));
+            Log::info('file' . print_r($_FILES['file'], true));
+
+            $data = $_POST;
+            $data['publish_user_id'] = $this->user_id;
+
+            //上传封面图片
+            $file = $_FILES['file'];//得到传输的数据
+            $name = $file['name'];
+            $type = strtolower(substr($name, strrpos($name, '.') + 1)); //得到文件类型，并且都转化成小写
+            $new_name = strtotime('now') . mt_rand(1000, 9999) . $type;
+            $allow_type = array('jpg', 'jpeg', 'gif', 'png'); //定义允许上传的类型
+            //判断文件类型是否被允许上传
+            if (!in_array($type, $allow_type)) {
+                //如果不被允许，则直接停止程序运行
+                return;
+            }
+            //判断是否是通过HTTP POST上传的
+            if (!is_uploaded_file($file['tmp_name'])) {
+                //如果不是通过HTTP POST上传的
+                return;
+            }
+
+            $upload_path = "/static/upload/cover/"; //上传文件的存放路径
+
+            //开始移动文件到相应的文件夹
+            if (!move_uploaded_file($file['tmp_name'], '../../sharefood/public' . $upload_path . $new_name)) {
+                return 'error';
+            }
+
+            $data['cover_img_url'] = $upload_path . $new_name;
+            $article = new ArticleModel;
+            $article->allowField(true)->save($data);
+            $insert_id = $article->article_id;
+            if (intval($insert_id) == 0) {
+                return '添加错误';
+            }
+            return 'ok';
+        }
+        return view();
+    }
+
+    /**
+     * 审核文章
+     */
+    public function verify()
+    {
+        $where = ['status' => 0];
+        $article = new ArticleModel;
+        $article_list = $article->getList($this->page, $where);
+        $article_list->render();
+        $this->assign('article_list', $article_list);
+        return view();
+    }
+
+    /**
+     * 回收站
+     * @return \think\response\View
+     */
+    public function recycle()
+    {
+        $where = ['status' => 1];
+        $article = new ArticleModel;
+        $article_list = $article->getList($this->page, $where);
+        $article_list->render();
+        $this->assign('article_list', $article_list);
+        return view();
+    }
+
+
+    public function test()
+    {
+        px(strtotime('0000-00-00 00:00:00'));
+        echo strtotime('now');
+    }
+}

@@ -1,0 +1,51 @@
+{extend name="public/base" /}
+{block name="content"}
+<!-- START MAIN CONTENT -->
+<div class="layout-sidebar-right group">
+
+    <!-- START SLOGAN -->
+    <div id="slogan">
+        <h1>美食排行</h1>
+    </div>
+    <!-- END SLOGAN -->
+
+    <!-- START CONTENT -->
+    <div class="group" id="content">
+
+        <!-- HENTRY -->
+        <div class="hentry">
+            {volist name="list" id="vo" key="k" empty="暂时没有数据" }
+            <!-- TESTIMONIAL -->
+            <div class="testimonials-list group">
+                <a href="/index/article/detail/id/{$vo.article_id}">
+                <div class="thumb-testimonial group">
+                        <img src="{$vo.cover_image}" alt="2"/>
+
+                </div>
+
+                <div class="the-post group" style="padding: 0 0 0 35px">
+                    <p style="margin:0 0 0 0">{$vo.title}
+                    </p>
+                    <p>
+                        总人气：{$vo.click_count}
+                    </p>
+                    <p>
+                        排名：第 {$k} 名
+                    </p>
+                    <p>
+                        短介绍：{$vo.content|mb_substr=0,100}
+                    </p>
+                </div>
+                </a>
+            </div>
+            <!-- END TESTIMONIAL -->
+            {/volist}
+            <div class="clear space"></div>
+        </div>
+        <!-- END HENTRY -->
+
+    </div>
+
+</div><!-- /.layout-sidebar-no -->
+<!-- END MAIN CONTENT -->
+{/block}

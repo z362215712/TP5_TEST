@@ -1,0 +1,72 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element"> <span>
+                            <img alt="image" style="width: 120px" class="img-circle" src="{$user.avatar_url}" />
+                             </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold" style="margin: 0 auto">{$user.nickname}</strong>
+                             </span></span> </a>
+                </div>
+                <div class="logo-element">
+                </div>
+            </li>
+            <li>
+                <a href="/admin/article/index"><i class="fa fa-diamond"></i> <span class="nav-label">主页</span></a>
+            </li>
+            {if $user.user_type==0}
+            <li class="active">
+                <a href=""><i class="fa fa-th-large"></i> <span class="nav-label">管理员管理</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="/admin/article/lst">美食DIY列表</a></li>
+                    <li><a href="/admin/article/mlst">商家美食列表</a></li>
+                    <li><a href="/admin/article/newslst">美食资讯列表</a></li>
+                    <li><a href="/admin/article/newspublish">发布资讯</a></li>
+                    <li><a href="/admin/merchant/reg">商家注册</a></li>
+                    <li><a href="/admin/user/reg">用户注册</a></li>
+                    <li><a href="/admin/user/lst">用户列表</a></li>
+                    <li><a href="/admin/merchant/lst">商家列表</a></li>
+                </ul>
+            </li>
+            {elseif $user.user_type===2}
+
+            <!--<li class="active">-->
+                <!--<a href=""><i class="fa fa-th-large"></i> <span class="nav-label">文章管理</span> <span class="fa arrow"></span></a>-->
+                <!--<ul class="nav nav-second-level">-->
+                    <!--<li><a href="/admin/article/lst">美食DIY列表</a></li>-->
+                    <!--<li><a href="/admin/article/mlst">商家美食列表</a></li>-->
+                    <!--<li><a href="/admin/article/newslst">美食资讯列表</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <li class="active">
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">用户管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/admin/article/publish">用户发布</a></li>
+                    <li><a href="/admin/article/lst">美食DIY列表</a></li>
+                </ul>
+            </li>
+            {else}
+            <li class="active">
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">商户管理</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/admin/article/mpublish">商家发布</a></li>
+                    <li><a href="/admin/article/mlst">商家美食列表</a></li>
+                </ul>
+            </li>
+
+            {/if}
+            <!--<li class="active">
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">管理员</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/admin/admin/lst">列表</a></li>
+                    <li><a href="/admin/admin/update">修改信息</a></li>
+                </ul>
+            </li>-->
+            <!--<li class="active">-->
+                <!--<a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">封面图管理</span></a>-->
+            <!--</li>-->
+        </ul>
+
+    </div>
+</nav>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html dir="ltr" lang="en-US">
+<!--<![endif]-->
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>美食</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="/f_static/css/style.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/f_static/css/prettyPhoto.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="http://fonts.googleapis.com/css?family=Droid+Sans"/>
+
+    <!-- special font -->
+    <link rel="stylesheet" type="text/css" media="all"
+          href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,400"/>
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="/f_static/js/jquery.js"></script>
+    <script type="text/javascript" src="/f_static/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="/f_static/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="/f_static/js/jquery.tipsy.js"></script>
+    <script type="text/javascript" src="/f_static/js/jquery.tweetable.js"></script>
+    <script type="text/javascript" src="/f_static/js/jquery.cycle.min.js"></script>
+    <script type="text/javascript" src="/f_static/js/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="/f_static/js/jquery.custom.js"></script>
+    <script type="text/javascript" src="/f_static/js/contact.js"></script>
+
+    <!-- SLIDER CYCLE -->
+    <link rel="stylesheet" type="text/css" media="all" href="/f_static/css/slider-cycle.css"/>
+    <script type="text/javascript" src="/f_static/js/swfobject.js"></script>
+
+    <!-- SLIDER ELEGANT -->
+    <link rel="stylesheet" type="text/css" media="all" href="/f_static/css/slider-elegant.css"/>
+
+    <!-- SLIDER NIVO -->
+    <link rel="stylesheet" type="text/css" media="all" href="/f_static/css/slider-nivo.css"/>
+    <script type="text/javascript" src="/f_static/js/jquery.nivo.slider.pack.js"></script>
+
+    <!-- SLIDER CAROUSEL -->
+    <link rel="stylesheet" type="text/css" media="all" href="/f_static/css/slider-carousel.css"/>
+
+    <!-- PORTFOLIO -->
+    <script type="text/javascript" src="/f_static/js/jquery.quicksand.js"></script>
+
+    <!-- [favicon] begin -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+    <!-- [favicon] end -->
+
+
+    <!--[if IE]>
+    <link rel='stylesheet' href='/f_static/css/style_ie.css" ?>' type='text/css' media='all'/>
+    <![endif]-->
+
+
+    <style type="text/css">
+        textarea {
+            font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+
+</head>
+
+
+<body class="no_js" onload="init();">
+
+<!-- START WRAPPER -->
+<div class="wrapper group">
+    {include file='public/header'}
+
+    {block name="content"}
+    <div class="layout-sidebar-no group">
+        <!-- START SLOGAN -->
+        <div id="slogan">
+            <h1>{$article.title}</h1>
+            <h3>商家：{$article.nickname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                发布时间：{$article.add_time|substr=0,4}年{$article.add_time|substr=5,2}月{$article.add_time|substr=8,2}日
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击数：{$article.click_count}
+            </h3>
+        </div>
+
+        <!-- END SLOGAN -->
+
+        <!-- START CONTENT -->
+        <div class="group" id="content">
+
+            <!-- HENTRY -->
+            <div class="hentry group">
+                {$article.content}
+            </div>
+            <!-- END HENTRY -->
+
+        </div><!-- /#content -->
+        <!-- END CONTENT -->
+
+        <div >
+            <div style="float: left;width:603px;height:300px" id="container">
+            <div style="float: right;height:100%;width: 795px;background-color: blue;">
+                <div style="position: absolute;top: 0;right:0;height: 25px;width: 200px;background-color: pink"></div>
+                <div style="position:absolute;top: 25px;height: 25px;width: 795px;background-color: yellow"></div>
+            </div>
+        </div>
+
+
+        <!--<div>
+            <div style="width:603px;height:300px" id="container">
+
+            </div>
+        </div>-->
+
+
+    </div><!-- /.layout-sidebar-no -->
+    <!-- END MAIN CONTENT -->
+    {/block}
+    {include file='public/footer'}
+    <div>
+
+
+
+        <!--地图-->
+</body>
+<script>
+    var init = function () {
+        var center = new qq.maps.LatLng({$article['latitude']}, {$article['longitude']});
+        var map = new qq.maps.Map(document.getElementById('container'), {
+            center: center,
+            zoom: 17
+        });
+        var infoWin = new qq.maps.InfoWindow({
+            map: map,
+            content: "{$article['m_name']}",
+            position: center,
+            zIndex: 10,
+            visible: true
+        });
+    }
+</script>
+</html>

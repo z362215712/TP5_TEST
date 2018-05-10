@@ -1,0 +1,137 @@
+{extend name="public/base" /}
+{block name="content"}
+<!-- START MAIN CONTENT -->
+<div class="layout-sidebar-right group">
+
+    <!-- START SLOGAN -->
+    <!--<div id="slogan">
+        <h1>Enjoy some of my recent work.</h1>
+        <h3>this is an optional subtitle for your portfolio page</h3>
+    </div>-->
+    <!-- END SLOGAN -->
+
+    <!-- START CONTENT -->
+    <div class="group" id="content">
+
+
+
+        <!--商家封面、地址和联系电话-->
+        <!-- HENTRY -->
+        <div class="hentry-post group portfolio-post internal-post">
+            <div class="post_header portfolio_header group">
+                <img alt="004" class="internal" style="width: 100%" src="{$merchant.cover_image}"/>
+                <h2>{$merchant.m_name}</h2>
+            </div>
+
+            <div class="post_content group">
+                <div class="work-skillsdate">
+                    <p class="skills"><span class="label">地址:</span> {$merchant.address}</p>
+                    <p class="workdate"><span class="label">联系方式:</span> {$merchant.contact}</p>
+                </div>
+
+                {$merchant.m_introduce}
+            </div>
+        </div>
+        <!-- END HENTRY -->
+
+    </div><!-- /#content -->
+    <!-- END CONTENT -->
+
+    <!-- SIDEBAR -->
+    <div id="sidebar" class="group">
+
+        <!-- MORE PROJECTS -->
+        <div id="more_projects-3" class="widget-1 widget-first widget more_projects">
+            <h2>店内美食</h2>
+
+            <div class="more-projects-widget">
+                <div class="top">
+                    <a class="prev" href="#">Prev</a>
+                </div>
+
+                <div class="sliderWrap">
+                    <ul>
+                        {volist name="list" id="vo" key="k" empty="暂时没有数据" }
+                        <!-- START ITEM -->
+                        <li class="work-item group">
+                            <a class="work-thumb" href="/index/article/mdetail/id/{$vo.ma_id}">
+                                <img src="{$vo.cover_image}" alt="001"/>
+                            </a>
+
+                            <a class="meta work-title" href="/index/article/mdetail/id/{$vo.ma_id}">{$vo.title}</a>
+                            <p class="meta categories"><a href="/index/article/mdetail/id/{$vo.ma_id}">
+                                {$vo.content|mb_substr=0,15}
+                            </a></p>
+                        </li>
+                        <!-- END ITEM -->
+                        {/volist}
+                    </ul>
+                </div>
+
+                <div class="controls">
+                    <a class="next" href="#">Next</a>
+                </div>
+
+                <!-- JS SCRIPT -->
+                <script type="text/javascript">
+                    jQuery(document).ready(function ($) {
+                        var slider_wrap = $('.more-projects-widget');
+                        var height_item = $('li', slider_wrap).outerHeight();
+                        var height_ul = $('ul', slider_wrap).height();
+                        var height_wrap = $('.sliderWrap', slider_wrap).height();
+                        var n_items = $('li', slider_wrap).length;
+
+                        // edit here to choose how many item display
+                        var visible = 3;
+
+                        $('.controls, .top', slider_wrap).show();
+
+                        // adjust height, according to visible item
+                        $('.sliderWrap', slider_wrap).css('height', height_item * visible - 6);
+
+                        function check_position() {
+                            var margin_top_ul = $('ul', slider_wrap).css('margin-top');
+                            var max_offset = ( n_items - visible ) * height_item * -1;
+
+                            if (margin_top_ul == '0px') {
+                                $('.prev', slider_wrap).addClass('disabled');
+                            }
+
+                            if (margin_top_ul == max_offset + 'px') {
+                                $('.next', slider_wrap).addClass('disabled');
+                            }
+                        }
+
+                        check_position();
+
+                        $('.next:not(.disabled)', slider_wrap).live('click', function () {
+                            $('ul', slider_wrap).animate({marginTop: '-=' + height_item}, 200, function () {
+                                check_position();
+                            });
+                            $('.prev', slider_wrap).removeClass('disabled');
+                            return false;
+                        });
+
+                        $('.prev:not(.disabled)', slider_wrap).live('click', function () {
+                            $('ul', slider_wrap).animate({marginTop: '+=' + height_item}, 200, function () {
+                                check_position();
+                            });
+                            $('.next', slider_wrap).removeClass('disabled');
+                            return false;
+                        });
+
+                        $('.disabled', slider_wrap).live('click', function () {
+                            return false;
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+        <!-- END MORE PROJECTS -->
+
+    </div><!-- /#sidebar -->
+    <!-- END SIDEBAR -->
+
+</div><!-- /.layout-sidebar-no -->
+<!-- END MAIN CONTENT -->
+{/block}

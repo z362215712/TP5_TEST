@@ -1,0 +1,121 @@
+{extend name="public/base" /}
+{block name="content"}
+<!-- START MAIN CONTENT -->
+<div class="layout-sidebar-right group">
+
+    <!-- START SLOGAN -->
+    <div id="slogan">
+        <h1>{$category_info.c_name}</h1>
+        <h3>{$category_info.c_content}</h3>
+    </div>
+    <!-- END SLOGAN -->
+
+    <!-- START CONTENT -->
+    <div class="group" id="content">
+
+        <!-- START HENTRY -->
+        <div class="hentry">
+            <div class="posts">
+                <div class="posts_space"></div>
+                {volist name="list" id="vo" key="k" empty="暂时没有数据" }
+                <!-- START POST -->
+                <div class="post hentry-post group blog-small">
+                    <div class="post_header group">
+                        <a href="/index/article/detail/id/{$vo.article_id}">
+                            <img src="{$vo.cover_image}" class="attachment-blog_big" alt="blog1"/>
+                        </a>
+                        <div class="post_meta">
+                            <div class="post_date">
+                                <span class="day">{$vo.add_time|substr=8,2}</span>
+                                <span class="month">{$vo.add_time|substr=5,2}</span>
+                                <span class="year">{$vo.add_time|substr=0,4}</span>
+                            </div>
+
+                            <div class="post_comments">
+                                <!--<a href="#" title="Comment on 50% off on our products for the month of August">评论数:1</a>-->
+                            </div>
+
+                            <div class="post_author">
+                                by {$vo.nickname}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post_content group">
+                        <div class="post_title">
+                            <h2><a href="/index/article/detail/id/{$vo.article_id}"
+                                   title="">{$vo.title}</a></h2>
+                        </div>
+
+                        <p>
+                            {$vo.content|mb_substr=0,270}
+                        </p>
+
+                        <p><a href="/index/article/detail/id/{$vo.article_id}" class="more-link">查看详情</a></p>
+                    </div>
+                </div>
+                {/volist}
+                <!-- END POST -->
+
+
+                <!-- START PAGINATION -->
+                <!--<div class='general-pagination group'>-->
+                    <!--<a href='#' class='selected'>1</a>-->
+                    <!--<a href='#'>2</a>-->
+                    <!--<a href='#'>&rsaquo;</a>-->
+                <!--</div>-->
+                <!-- END PAGINATION -->
+
+            </div>
+
+        </div>
+        <!-- END HENTRY -->
+
+    </div><!-- /#content -->
+    <!-- END CONTENT -->
+
+    <!-- SIDEBAR -->
+    <div id="sidebar" class="group">
+        <!-- POPULAR POSTS -->
+        <div class="widget-first widget recent-posts">
+            <h2>最热排行</h2>
+            <div class="recent-post group">
+                <!-- POST -->
+                {volist id="rl" name="rank_list"}
+                <div class="hentry-post group">
+                    <div class="thumb-img">
+                        <a href="/index/article/detail/id/{$vo.article_id}">
+                            <img src="{$rl.cover_image}" class="attachment-thumb_recentposts wp-post-image"
+                                 alt="blog1"/>
+                        </a>
+                    </div>
+                    <a href="/index/article/detail/id/{$vo.article_id}"
+                       title="Enjoy the great features of Impero, the WP theme" class="title">{$rl.title}</a>
+                    <p class="post-date">{$rl.add_time|substr=5,2}月{$rl.add_time|substr=8,2}日</p>
+                </div>
+                {/volist}
+                <!-- END POST -->
+            </div>
+        </div>
+        <!-- END RECENT POSTS -->
+
+        <!-- START CATEGORIES -->
+        <div class="widget almost-all-categories">
+            <h2>Categories</h2>
+
+            <ul id="almost_all_categories_widget">
+                <li><a title="View all posts filed under Coffee" href="#">甜品</a> (2)</li>
+                <li><a title="View all posts filed under Coffee" href="#">饮品</a> (2)</li>
+                <li><a title="View all posts filed under Coffee" href="#">正餐</a> (2)</li>
+                <li><a title="View all posts filed under Coffee" href="#">其他</a> (2)</li>
+
+            </ul>
+        </div>
+        <!-- END CATEGORIES -->
+
+    </div><!-- /#sidebar -->
+    <!-- END SIDEBAR -->
+
+</div><!-- /.layout-sidebar-right -->
+<!-- END MAIN CONTENT -->
+{/block}

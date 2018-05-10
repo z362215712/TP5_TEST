@@ -1,0 +1,67 @@
+{extend name="public/base" /}
+
+
+
+{block name="search_banner"}
+<input type="text" id="search_box"/>
+<button type="button" id="btn_search">搜索</button>
+{/block}
+
+{block name="content"}
+<table id="table-1">
+    <thead>
+    <tr>
+        <th style="width: 30px">ID</th>
+        <th>标题</th>
+        <th>头像</th>
+        <th>发布人</th>
+        <th>内容</th>
+        <th>发布时间</th>
+        <th>审核情况</th>
+        <th>编辑</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="article_list" id="vo"}
+    <tr>
+        <td>{$vo.article_id}</td>
+        <td>{$vo.title}</td>
+        <td><img src="__PUBLIC__{$vo.avatar_url}" style="width: 50px"/></td>
+        <td>{$vo.nickname}</td>
+        <td>{$vo.content}</td>
+        <td>{$vo.publish_time}</td>
+        <td>{$vo.status}</td>
+        <td><button class="btn btn-primary " onclick="return pass({$vo.article_id})" style="margin: 0 10px 0 0">通过审核</button></td>
+        {/volist}
+    <tr>
+
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="7"><span style="float: right">{$article_list->render()}</span></td>
+    </tr>
+    </tfoot>
+</table>
+{/block}
+
+{block name="script"}
+<script>
+    $('#btn_search').click(function () {
+        key_word = $('#search_box').val();
+        window.location.href="index?keyword="+ key_word;
+    })
+
+    function pass(id) {
+        $.post({
+            url: '/sharefood/public/admin/Article/updateStatus',
+            data: {act: 'pass_' + id},
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                window.location.reload();
+            }
+        });
+    }
+</script>
+{/block}

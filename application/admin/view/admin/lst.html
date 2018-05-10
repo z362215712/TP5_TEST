@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{include file='public/header'}
+<body>
+
+<div id="wrapper">
+    {include file="public/left"}
+    <div id="page-wrapper" class="gray-bg">
+        {include file="public/head"}
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <form method="get" action="lst" class="pull-right mail-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" name="keyword"
+                                       placeholder="关键字">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="ibox-content">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>头像</th>
+                                        <th>昵称</th>
+                                        <th>注册时间</th>
+                                        <th>发布文章数</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {volist name="user_list" id="vo" key="k" empty="暂时没有数据" }
+                                    <tr class="gradeX">
+                                        <td>{$k}</td>
+                                        <td><img src="{$vo.avatar_url}" style="height: 60px;width: 60px"/></td>
+                                        <td>{$vo.nickname}</td>
+                                        <td class="center">{$vo.reg_time}</td>
+                                        <td class="center">{$vo.publish_count}</td>
+                                        <td class="center">
+                                            <a class="btn btn-primary"  href="/admin/admin/update/id/{$vo.user_id}">编辑</a>
+                                            <a onclick="cancel({$vo.user_id})" class="btn btn-danger"  href="#" onmouseup="alert('确定取消管理员吗？','取消')">取消管理员</a>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="7"><span style="float: right">{$user_list->render()}</span></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Mainly scripts -->
+<script src="/static/js/jquery-2.1.1.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<script src="/static/js/plugins/dataTables/datatables.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/static/js/inspinia.js"></script>
+<script src="/static/js/plugins/pace/pace.min.js"></script>
+
+<script>
+    /*function remove(id){
+     $.post("/admin/remove/remove", { id: id },
+     function(data){
+     window.location.reload();
+     }, "Json")
+     }*/
+    function cancel(id) {
+        $.post("/admin/admin/cancel", {id: id},
+                function (data) {
+                    window.location.reload();
+                }, "Json")
+    }
+</script>
+
+</body>
+</html>
+
+</title>
+</head>
+<body>
+
+</body>
+</html>

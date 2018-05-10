@@ -1,0 +1,234 @@
+{extend name="public/base" /}
+{block name="content"}
+<!-- START SLIDER -->
+<div id="slider" class="carousel">
+    <div class="wrapSlider">
+        <ul class="scrolling">
+            <!--<li>
+                <img src="/f_static/images/slider/carousel/001.jpg" alt="A sweet thing"/>
+                <div class="caption">
+                    <h2>A sweet thing</h2>
+                    <p>a lovely and cute thing in your lunch</p>
+                </div>
+            </li>
+
+            <li>
+                <img src="/f_static/images/slider/carousel/002.jpg" alt="Chocolates closeup"/>
+                <div class="caption">
+                    <h2>Chocolates closeup</h2>
+                    <p>Delicious background of dark chocolates</p>
+                </div>
+            </li>
+
+            <li>
+                <img src="/f_static/images/slider/carousel/003.jpg" alt="Healthy breakfast with honey"/>
+                <div class="caption">
+                    <h2>Healthy breakfast with honey</h2>
+                    <p>Breakfast scene. Honey pouring from glass jar</p>
+                </div>
+            </li>
+
+            <li>
+                <img src="/f_static/images/slider/carousel/004.jpg" alt="We love fruits"/>
+                <div class="caption">
+                    <h2>We love fruits</h2>
+                    <p>do u like apple and cinnamon?</p>
+                </div>
+            </li>-->
+
+
+            <li>
+                <img src="/f_static/images/lunbo/1.jpg" alt="A sweet thing"/>
+                <div class="caption">
+                    <h2>芝士番茄炒通心粉</h2>
+                </div>
+            </li>
+
+            <li>
+                <img src="/f_static/images/lunbo/2.jpg" alt="A sweet thing"/>
+                <div class="caption">
+                    <h2>荷兰面包冰淇淋</h2>
+                </div>
+            </li>
+
+            <li>
+                <img src="/f_static/images/lunbo/3.jpg" alt="A sweet thing"/>
+                <div class="caption">
+                    <h2>酥皮芝士挞</h2>
+                </div>
+            </li>
+
+            <li>
+                <img src="/f_static/images/lunbo/4.jpg" alt="A sweet thing"/>
+                <div class="caption">
+                    <h2>香滑鲜奶炖蛋</h2>
+                </div>
+            </li>
+        </ul><!-- /.scrolling -->
+
+        <div class="opacity left"><span></span></div>
+        <div class="opacity right"><span></span></div>
+    </div><!-- /.wrapSlider -->
+
+    <!-- JS SCRIPT -->
+    <script type="text/javascript">
+        $('#slider ul.scrolling').jcarousel({
+            wrap: "circular",
+            auto: 2,
+            scroll: 1,
+            start: 0,
+            animation: 2000,
+            //buttonNextHTML: null,
+            buttonPrevHTML: null
+        });
+    </script>
+
+</div><!-- /#slider -->
+<!-- END SLIDER -->
+
+<!-- START MAIN CONTENT -->
+<div class="layout-sidebar-left group" style="width: 1000px">
+
+    <!-- START CONTENT -->
+    <div class="group" id="content" style="width: 753.334px">
+
+        <!-- snack -->
+        <div class="home_page_items home_page_services group">
+            <h3><a href="/index/article/lst/cid/0">美食DIY</a></h3>
+            <h4>让你秒变大厨</h4>
+            {volist name="list" id="s" key="k" empty="暂时没有数据" }
+            <div class="home_page_item home_page_item_service home_page_item_first">
+                <a href="/index/article/detail/id/{$s.article_id}"><img alt="001" class="picture"
+                                                                        style="width: 220px;height: 178px"
+                                                                        src="{$s.cover_image}"/></a>
+                <h5 style="text-align:center"><a href="/index/article/detail/id/{$s.article_id}">{$s.title}</a></h5>
+                <p style="text-align:center">{$s.nickname|}</p>
+            </div>
+            {/volist}
+        </div><!-- /services -->
+        <!-- /snack -->
+
+        <!-- drink -->
+        <div class="home_page_items home_page_portfolio group">
+
+            <h3><a href="/index/article/lst/cid/2">商家推荐</a></h3>
+            <h4>天下美食尽收眼底</h4>
+            {volist name="mlist" id="s" key="k" empty="暂时没有数据" }
+            <div class="home_page_item home_page_item_portfolio home_page_item_first">
+                <a href="/index/user/mdetail/m_id/{$s.m_id}">
+                    <img alt="001" class="picture" style="width: 220px;height: 178px" src="{$s.cover_image}"/></a>
+                <h5><a title="Kassyopea Theme" href="/index/user/mdetail/m_id/{$s.m_id}">{$s.m_name}</a></h5>
+                <p class="categories"><a rel="tag" href="/index/user/mdetail/m_id/{$s.m_id}">{$s.m_introduce}</a></p>
+            </div>
+            {/volist}
+        </div>
+        <!-- /drink -->
+    </div><!-- /#conten -->
+    <!-- END CONTENT -->
+
+    <!-- SIDEBAR -->
+    <div id="sidebar" class="group">
+        <div class="recent-post group">
+            <h2>热点推荐</h2>
+            {volist name="recommend_list" id="s" key="k" empty="暂时没有数据" }
+
+            <!-- POST -->
+            <div class="hentry-post group">
+                <div class="thumb-img">
+                    <img src="{$s.cover_image}" width="53" height="53"
+                         class="attachment-thumb_recentposts wp-post-image"
+                         alt="blog1"/>
+                </div>
+                <a href="/index/article/detail/id/{$s.article_id}" title="{$s.title}" class="title">{$s.title}
+                </a>
+                <p class="post-date">{$s.add_time}</p>
+            </div>
+            <!-- END POST -->
+            {/volist}
+
+
+        </div>
+
+
+        <!-- START CATEGORIES -->
+        <div class="widget almost-all-categories">
+            <h2>美食分类</h2>
+
+            <ul id="almost_all_categories_widget">
+                {volist name="category_list" id="s" key="k" empty="暂时没有数据" }
+                <li class="cat-item cat-item-7">
+                    <a title="View all posts filed under Cake" href="/index/article/lst/cid/{$s.c_id}">{$s.c_name}</a>{if
+                    isset($s.child)} ({$s.child|count}){/if}
+                    <ul class="children">
+                        {if isset($s.child)}
+                        {volist name="s.child" id="sc" key="kc" }
+                        <li><a href="/index/article/lst/cid/{$sc.c_id}">{$sc.c_name}</a></li>
+                        {/volist}
+                        {/if}
+                    </ul>
+                </li>
+
+                {/volist}
+            </ul>
+
+            <!--<ul id="almost_all_categories_widget">
+                <li class="cat-item cat-item-7">
+                    <a title="View all posts filed under Cake" href="#">Cake</a> (2)
+                    <ul class="children">
+                        <li><a href="#">Cheese Cake</a> (2)</li>
+                    </ul>
+                </li>
+                <li><a title="View all posts filed under Coffee" href="#">Coffee</a> (2)</li>
+                <li>
+                    <a title="View all posts filed under Lovely Theme" href="#">Lovely Theme</a> (1)
+                    <ul class="children">
+                        <li><a title="View all posts filed under Impero Theme" href="#">Impero Theme</a> (0)</li>
+                        <li><a title="View all posts filed under Kassyopea Theme" href="#">Kassyopea Theme</a> (0)</li>
+                    </ul>
+                </li>
+                <li><a title="View all posts filed under Marketing &amp; Business" href="#">Marketing &amp; Business</a>
+                    (1)
+                </li>
+                <li><a title="View all posts filed under Uncategorized" href="#/">Uncategorized</a> (0)</li>
+                <li><a title="View all posts filed under WordPress templates" href="#">WordPress templates</a> (1)</li>
+            </ul>-->
+        </div>
+        <!-- END CATEGORIES -->
+
+        <div class="widget-last widget testimonial-widget">
+            <h2>美食资讯</h2>
+
+            <div class="testimonial-text">
+                {volist name="newslst" id="ns" key="k" empty="暂时没有数据" }
+                <ul>
+                    <li>
+                        <a href="/index/article/news/id/{$ns.news_id}">
+                            {$ns.title}
+                        </a>
+                    </li>
+                </ul>
+                {/volist}
+            </div>
+
+            <script type="text/javascript">
+                //<![CDATA[
+                jQuery(document).ready(function ($) {
+                    $('.testimonial-widget ul').cycle({
+                        fx: 'fade',
+
+                        timeout: 8000,
+                        speed: 300,
+                        //pager:'.p-testimonial'
+                    });
+                });
+                //]]>
+            </script>
+        </div>
+
+
+    </div><!-- /#sidebar -->
+    <!-- END SIDEBAR -->
+
+</div><!-- /.layout-sidebar-right -->
+<!-- END MAIN CONTENT -->
+{/block}

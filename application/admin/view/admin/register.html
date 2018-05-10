@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>登录管理系统</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+
+
+    <!--<script src="/static/js/jquery-2.1.1.js"></script>-->
+
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js" type="text/javascript"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.js" type="text/javascript"></script>-->
+    <script src="https://cdn.bootcss.com/jquery.form/3.46/jquery.form.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/f_static/js/uploadImg.js"></script>
+
+
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <!--<div>-->
+
+        <!--<h1 class="logo-name">Share</h1>-->
+
+        <!--</div>-->
+        <h3>后台管理系统</h3>
+
+        <form id="myForm" class="m-t" action="admin/register" role="form" method="post"
+              enctype="multipart/form-data">
+            <div class="form-group">
+                <input id="sfmobile" name="mobile" type="mobile" class="form-control" placeholder="手机号"
+                       value=""
+                       required="">
+            </div>
+            <div class="form-group">
+                <select id="sex" name="sex" class="form-control">
+                    <option value="">性别</option>
+                    <option value="0">男</option>
+                    <option value="1">女</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <input id="nickname" name="nickname" type="mobile" class="form-control" placeholder="昵称" value=""
+                       required="">
+            </div>
+
+            <!--<div class="form-group">-->
+            <!--<input type="file" id="file" name="file" class="form-control">-->
+            <!--</div>-->
+
+
+            <div class="form-group">
+                <input id="pwd1" type="password" name="password" class="form-control" placeholder="密码" value=""
+                       required="">
+            </div>
+            <div class="form-group">
+                <input id="pwd2" type="password" name="repassword" class="form-control" placeholder="确认密码" value=""
+                       required="">
+            </div>
+            <type id="btn" type="submit" class="btn btn-primary block full-width m-b">注册</type>
+        </form>
+
+        <p class="m-t"></p>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+</body>
+
+
+<script type="text/javascript">
+    $("#btn").click(function () {
+        //var mobile = $("#sfmobile").val();
+        var passwd = $("#pwd1").val();
+        var passwdre = $("#pwd2").val();
+        //var sex = $("#sex").val();
+        if (passwd != passwdre) {
+            alert("两次输入密码不匹配");
+            return;
+        }
+
+
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "",//url
+            data: $('#myForm').serialize(),
+            success: function (result) {
+                if (result != true) {
+                    alert(result);
+                } else {
+                    alert("注册成功，请登录");
+                    window.location.href = "/admin/admin/login"
+                }
+
+            },
+            error: function () {
+                alert("异常！");
+            }
+        });
+
+
+    });
+
+
+    //        (function ($) {
+    //            $('#btn').on('click', function () {
+    //                $button = $(this);
+    //                $form = $('#myForm');
+    //                $buttonText = $button.text();
+    //                $.ajax({
+    //                    url: $form.attr('action'),
+    //                    data: $form.serialize(),
+    //                    dataType: 'JSON',
+    //                    type: 'POST',
+    //                    beforeSend: function () {
+    //                        $button.text('处理中..').attr('disabled', 'disabled');
+    //                    },
+    //                    success: function (ret) {
+    //                        if (ret.message) {
+    //                            alert(ret.message);
+    //                            /*不想看到浏览器的alert，既丑又阻塞，为啥不换layui..*/
+    //                        }
+    //                        if (ret.code == 0) {
+    //                            if (ret.data.url) {
+    //                                window.location.href = ret.data.url;
+    //                            } else {
+    //                                window.location.reload();
+    //                            }
+    //                        }
+    //                    },
+    //
+    //                    error: function () {
+    //                        alert('页面错误，请稍后再试');
+    //                    },
+    //                    complete: function (xhr, status) {
+    //                        $button.text($buttonText).removeAttr('disabled');
+    //                    }
+    //                });
+    //            });
+    //        })(jQuery);
+    //
+    //        $(document).ready(function () {
+    //            $('#myForm').ajaxForm(function () {
+    //                alert("OK");
+    //            });
+    //        });
+</script>
+<script>
+
+
+    //        $("#btn").click(function () {
+    ////            var mobile = $("#sfmobile").val();
+    ////            var passwd = $("#pwd1").val();
+    ////            var passwdre = $("#pwd2").val();
+    ////            var sex = $("#sex").val();
+    //            if (passwd != passwdre) {
+    //                alert("两次输入密码不匹配")
+    //            }
+    //
+    //            $.post("register", {mobile: mobile, passwd: passwd, sex: sex}, function (result) {
+    //                if (result == true) {
+    //                    alert("注册成功！");
+    //                    window.location.href = '/admin/admin/login'
+    //                } else {
+    //                    alert(result)
+    //                    //console.log(result)
+    //                }
+    //            }, 'json');
+    //        });
+</script>
+
+</html>

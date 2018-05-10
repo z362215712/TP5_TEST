@@ -1,0 +1,94 @@
+{extend name="public/base" /}
+
+{block name="css_style"}
+<style>
+    div label {
+        padding: 5px 10px;
+
+    }
+</style>
+{/block}
+
+{block name="search_banner"}
+{/block}
+
+{block name="content"}
+<form id="form1" method="post" action="publish" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-2"><label for="">标题：</label></div>
+        <div class="col-md-4"><input type="text" class="form-control"
+                                     value="title"
+                                     name="nickname"></div>
+        <div class="col-md-2"><label for="">用户名：</label></div>
+        <div class="col-md-3"><input type="text" class="form-control"
+                                     value="{$user.nickname}"
+                                     name="nickname" readonly="readonly"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"><label for="">封面：</label></div>
+        <div class="col-md-4"><input type="file" class="form-control"></div>
+        <div class="col-md-2"><label for="">发布时间：</label></div>
+        <div class="col-md-3"><input type="text"  class="form-control" value="{:date('Y-m-d')}" readonly="readonly"></div>
+    </div>
+
+
+    <div style="clear: both">
+        <!-- 加载编辑器的容器 -->
+        <script id="container" name="content" type="text/plain" style="height:250px;">
+
+        </script>
+        <button id="btnSend" class="btn btn-block btn-success" style="margin: 10px auto">提交</button>
+    </div>
+</form>
+{/block}
+
+{block name="script"}
+<!-- 配置文件 -->
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__PUBLIC__/static/ueditor/ueditor.all.min.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>
+
+<script>
+    $(function () {
+        var options = {
+            success: function (data) {
+                alert(data);
+            },  //处理完成
+            error: function (data) {
+                alert(data);
+            },
+            resetForm: true,
+            dataType: 'json'
+        };
+
+        $('#form1').submit(function () {
+            console.log('halo');
+            $(this).ajaxSubmit(options);
+            return false;
+        });
+    });
+
+
+    /*    $('#btnSend').click(function () {
+     var ue = UE.getEditor('container');
+     //对编辑器的操作最好在编辑器ready之后再做
+     var values = $('#form1').serialize();
+     var html = ue.getContent();
+     var txt = ue.getContentTxt();
+
+     $.post({
+     url: 'publish',
+     data: {values: values, html_content: html, txt_content: txt},
+     dataType: 'text',
+     success: function (data) {
+     console.log(data);
+     },
+     });
+     })*/
+</script>
+{/block}

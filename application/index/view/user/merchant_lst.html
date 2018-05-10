@@ -1,0 +1,113 @@
+{extend name="public/base" /}
+{block name="content"}
+<!-- START MAIN CONTENT -->
+<div class="layout-sidebar-right group">
+    <!-- START CONTENT -->
+    <div class="group" id="content">
+
+        <!-- HENTRY -->
+        <div class="hentry group">
+            <h2>商家列表</h2>
+            <!-- NEWS -->
+            {volist name="list" id="vo" empty="暂时没有数据"}
+            <div class="news-list group">
+                <div class="thumb-news group"><a href="/index/user/mdetail/m_id/{$vo.m_id}"><img alt="news1" src="{$vo.cover_image}" />
+                </a></div>
+
+                <div class="the-post group">
+                    <h3>{$vo.m_name}</h3>
+
+                    <p class="news-date">{$vo.address}</p>
+                    <p class="news-date">{$vo.contact}</p>
+
+                    <p>{$vo.m_introduce}</p><a href="http://yourinspirationweb.com/demo/impero/post/news/do-you-love-my-stuff/" class="read-more">Read more</a>
+                </div>
+            </div>
+            {/volist}
+            <!-- END NEWS -->
+
+
+        </div>
+        <!-- END HENTRY -->
+
+    </div><!-- /#content -->
+    <!-- END CONTENT -->
+
+    <!-- SIDEBAR -->
+    <!--<div id="sidebar" class="group">
+
+        &lt;!&ndash; START FEATURED PROJECTS &ndash;&gt;
+        <div class="widget-first widget featured-projects">
+            <h2>Featured Projects</h2>
+
+            <div class="featured-projects-widget">
+                <ul>
+                    <li>
+                        <div class="thumb-project">
+                            <a href='#'><img src="images/featured-projects/001.jpg" alt="004" /></a>
+                        </div>
+
+                        <h5><span>Kassyopea Theme</span></h5>
+
+                        <p class="categories"><a href="#" rel="tag">web design</a></p>
+                    </li>
+
+                    <li>
+                        <div class="thumb-project">
+                            <a href='#'><img src="images/featured-projects/002.jpg" alt="006" /></a>
+                        </div>
+
+                        <h5><span>Olìmpo</span></h5>
+
+                        <p class="categories"><a href="#" rel="tag">web design</a></p>
+                    </li>
+
+                    <li>
+                        <div class="thumb-project">
+                            <a href='#'><img src="images/featured-projects/003.jpg" alt="001" /></a>
+                        </div>
+
+                        <h5><span>Coffee Break</span></h5>
+
+                        <p class="categories"><a href="#" rel="tag">logo design</a></p>
+                    </li>
+                </ul>
+            </div>
+
+            <script type="text/javascript">
+                //<![CDATA[
+                jQuery(document).ready(function($){
+                    $('.featured-projects-widget ul').cycle({
+                        fx: 'scrollLeft',
+                        //easing: 'none',
+                        timeout: 8000,
+                        speed: 300
+                    });
+                });
+                //]]>
+            </script>
+        </div>
+        &lt;!&ndash; END FEATURED PROJECTS &ndash;&gt;
+
+        &lt;!&ndash; START TEXT &ndash;&gt;
+        <div class="widget-last widget text-image">
+            <h2>A simple widget</h2>
+
+            <img src="images/image.png" alt="A simple widget" />
+
+            <p>
+                Nunc malesuada varius turpis, quis porta enim tincidunt vitae.
+                Suspendisse luctus lacinia dignissim. Etiam et <a href="#">enim
+                quis urna sagittis porta et in felis.</a>
+            </p>
+        </div>
+        &lt;!&ndash; END TEXT &ndash;&gt;
+
+    </div>-->
+
+</div><!-- /#sidebar -->
+<!-- END SIDEBAR -->
+
+</div><!-- /.layout-sidebar-no -->
+<!-- END MAIN CONTENT -->
+{/block}

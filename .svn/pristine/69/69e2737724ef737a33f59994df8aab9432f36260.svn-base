@@ -1,0 +1,148 @@
+<?php
+namespace app\admin\controller;
+
+use think\Controller;
+use think\Db;
+use think\Request;
+use app\admin\model\Admin as AdminModel;
+
+class Admin extends Common
+{
+    private $salt = 'asd';
+    private $user_id;
+
+
+
+    protected function _initialize()
+    {
+        //$this->user_id = $_SESSION['user_id'];
+        parent::_initialize();
+        $this->user_id = 1;
+        if (Request::instance()->isGet()) {
+            $user = Db::name('user')->where('user_id', $this->user_id)->find();
+            $this->assign('user', $user);
+        }
+    }
+
+    public function login()
+    {
+        if (Request::instance()->isPost()) {
+            $mobile = Request::instance()->param('mobile', '');
+            $login_passwd = Request::instance()->param('passwd', '');
+
+            /*$mobile = '18218526325';
+            $login_passwd = 'qweqwe';
+            $nickname = 'yoga';*/
+
+            $md5_passwd = md5($login_passwd . $this->salt);  //把密码和salt连接
+            $passwd = db('User')->where('mobile', $mobile)->column('passwd');
+            if ($passwd[0] === $md5_passwd) {
+                return true;
+            } else {
+                return '账号或密码错误';
+            }
+        }
+        return view();
+
+    }
+
+    public function register()
+    {
+        if (Request::instance()->isPost() || 1) {
+            $mobile = Request::instance()->param('mobile', '');
+            $login_passwd = Request::instance()->param('passwd', '');
+            $nickname = Request::instance()->param('nickname', '');
+
+            /*$mobile = '18218526325';
+            $login_passwd = 'qweqwe';
+            $nickname = 'yoga';*/
+
+            $manager = db('User')->where('mobile', $mobile)->find();
+            if ($manager !== Null) {
+                return '已存在该管理员';
+            }
+
+            $md5_passwd = md5($login_passwd . $this->salt);  //把密码和salt连接
+            $data = [
+                'mobile' => $mobile,
+                'passwd' => $md5_passwd,
+                'nickname' => $nickname,
+                'user_type' => 1,
+            ];
+            $manager_id = Db::name('manager')->insert($data);
+            if ($manager_id > 0) {
+                return true;
+            } else {
+                return '添加失败';
+            }
+        }
+        return view();
+
+    }
+
+    public function userList()
+    {
+        $type = Request::instance()->param('user_type', '0');
+        if ($type == '0') {
+            $list = Db::name('user')->where('user_type', 0)->paginate(2);
+        } elseif ($type == '1') {
+            $list = Db::name('user')->where('user_type', 1)->paginate(2);
+        } else {
+            return false;
+        }
+        $this->assign('list', $list);
+        return $this->fetch('admin/list');
+    }
+
+    public function add()
+    {
+        if (Request::instance()->isGet()) {
+            return view();
+        } else {
+            $mobile = Request::instance()->param('mobile', '');
+            $passwd = Request::instance()->param('passwd', '');
+            $nickname = Request::instance()->param('nickname', '');
+            $md5_passwd = md5($passwd . $this->salt);  //把密码和salt连接
+
+            //上传图片
+            $file = $_FILES['file'];//得到传输的数据
+            $name = $file['name'];
+            $type = strtolower(substr($name, strrpos($name, '.') + 1)); //得到文件类型，并且都转化成小写
+            $allow_type = array('jpg', 'jpeg', 'gif', 'png'); //定义允许上传的类型
+            //判断文件类型是否被允许上传
+            if (!in_array($type, $allow_type)) {
+                //如果不被允许，则直接停止程序运行
+                return;
+            }
+            //判断是否是通过HTTP POST上传的
+            if (!is_uploaded_file($file['tmp_name'])) {
+                //如果不是通过HTTP POST上传的
+                return;
+            }
+
+            $upload_path = "/static/upload/"; //上传文件的存放路径
+
+            //开始移动文件到相应的文件夹
+            if (!move_uploaded_file($file['tmp_name'], $upload_path . $file['name'])) {
+                return 'error';
+            }
+
+            $data = [
+                'mobile' => $mobile,
+                'passwd' => $md5_passwd,
+                'nickname' => $nickname,
+                'user_type' => 1,
+                'avatar_url' => $upload_path.$file['name'],
+            ];
+
+            $admin = new AdminModel;
+            $admin->save($data);
+            $insert_id = $admin->user_id;
+            if (intval($insert_id) > 0) {
+                return 'ok';
+            } else {
+                return 'error';
+            }
+        }
+    }
+}

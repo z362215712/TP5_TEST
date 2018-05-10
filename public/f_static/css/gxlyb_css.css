@@ -1,0 +1,57 @@
+div[id="container1"]{
+	padding: 10px;
+
+}
+#container1 body{
+	background-image: url('../img/bgi.jpg');
+	background-repeat: round;
+}
+#container1  img{
+	margin: 15px 0px 0px 10px;
+	width: 100px;
+	height: 100px;
+	border-radius: 5px;
+	-webkit-transform: rotate(10deg);
+	-webkit-transition: -webkit-transform 1s linear;
+}
+
+#container1 img:hover{
+	-webkit-transform: rotate(180deg);
+}
+#container1 .content{
+	width: 650px;
+	position: relative;
+	left: 30px;
+	background-color: #e2eff9;
+	border-radius: 20px;
+	padding: 10px;
+	margin-top: 10px;
+	word-wrap: break-word;
+}
+
+#container1 .content:hover{
+	text-shadow: 1px 1px 1px gray;
+}
+
+#container1 .content:after{
+	content: "\00a0";
+	display: block;
+	position:absolute;
+	top:15px;
+	left: -20px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 10px 20px 10px 0px;
+	border-color: transparent #e2eff9 transparent transparent;
+}
+
+.float{
+	float: left;
+	column-fill: balance;
+}
+
+.clear{
+	clear: both;
+}
+

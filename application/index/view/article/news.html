@@ -1,0 +1,29 @@
+{extend name="public/base" /}
+
+{block name="content"}
+<div class="layout-sidebar-no group">
+
+    <!-- START SLOGAN -->
+    <div id="slogan">
+        <h1>{$article.title}</h1>
+        <h3>作者：{$article.nickname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            发布时间：{$article.add_time|substr=0,4}年{$article.add_time|substr=5,2}月{$article.add_time|substr=8,2}日
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击数：{$article.click_count}
+        </h3>
+    </div>
+    <!-- END SLOGAN -->
+
+    <!-- START CONTENT -->
+    <div class="group" id="content">
+
+        <!-- HENTRY -->
+        <div class="hentry group">
+            {$article.content}
+        </div>
+        <!-- END HENTRY -->
+
+    </div><!-- /#content -->
+    <!-- END CONTENT -->
+
+</div>
+{/block}

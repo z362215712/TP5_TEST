@@ -1,0 +1,86 @@
+{extend name="public/base" /}
+{block name="content"}
+<!-- START MAIN CONTENT -->
+<div class="layout-sidebar-right group">
+
+    <!-- START SLOGAN -->
+    <div id="slogan">
+        <h1>人气排行</h1>
+    </div>
+    <!-- END SLOGAN -->
+
+    <!-- START CONTENT -->
+    <div class="group" id="content">
+
+        <!-- HENTRY -->
+        <div class="hentry">
+            {volist name="list" id="vo" key="k" empty="暂时没有数据" }
+            <!-- TESTIMONIAL -->
+            <div class="testimonials-list group">
+                <div class="thumb-testimonial group">
+                    <img src="{$vo.avatar_url}" alt="2"/>
+
+                </div>
+
+                <div class="the-post group" style="padding: 0 0 0 35px">
+                    <p style="margin:0 0 0 0">{$vo.nickname}&nbsp;&nbsp;&nbsp;
+                        {if condition="$vo.sex == 1"}
+                        <img src="/f_static/images/icon/male.png" alt=""/>
+                        {else/}
+                        <img src="/f_static/images/icon/female.png" alt=""/>
+                        {/if}
+                    </p>
+                    <p>
+                        总人气：{$vo.cc}
+                    </p>
+                    <p>
+                        排名：第 {$k} 名
+                    </p>
+                    <p>
+                        短介绍：{$vo.introduce}
+                    </p>
+                </div>
+            </div>
+            <!-- END TESTIMONIAL -->
+            {/volist}
+            <div class="clear space"></div>
+        </div>
+        <!-- END HENTRY -->
+
+    </div><!-- /#content -->
+    <!-- END CONTENT -->
+
+    <!-- SIDEBAR -->
+    <!--<div id="sidebar" class="group">-->
+
+    <!--&lt;!&ndash; START TEXT &ndash;&gt;-->
+    <!--<div class="widget-first widget widget_text">-->
+    <!--<h2>Customer support</h2>-->
+
+    <!--<div class="textwidget">-->
+    <!--<p>-->
+    <!--If you need support before purchase, feel free to contact us by phone at <strong>09.567389</strong>.-->
+    <!--This is a simple text widget, enjoy it!-->
+    <!--</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; END TEXT &ndash;&gt;-->
+
+    <!--&lt;!&ndash; START TEXT &ndash;&gt;-->
+    <!--<div class="widget-last widget text-image">-->
+    <!--<h2>Need a custom cake?</h2>-->
+
+    <!--<div class="text-image" style="text-align:center">-->
+    <!--<img src="images/chees5.png" alt="Need a custom cake?" />-->
+    <!--</div>-->
+
+    <!--<p>If you are hungry and need an amazing custom cake for your party, <strong>call us!</strong></p>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; END TEXT &ndash;&gt;-->
+
+    <!--</div>&lt;!&ndash; /#sidebar &ndash;&gt;-->
+    <!-- END SIDEBAR -->
+
+</div><!-- /.layout-sidebar-no -->
+<!-- END MAIN CONTENT -->
+{/block}
